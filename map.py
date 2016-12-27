@@ -21,7 +21,7 @@ class Map(object):
         rot_rect.center = rot_image.get_rect().center
         rot_image = rot_image.subsurface(rot_rect).copy()
 
-        self.gameDisplay.blit(rot_image, (x,y))
+        self.gameDisplay.blit(rot_image, (x-50,y-50))
 
     def map(self, x,y):
         self.gameDisplay.blit(self.bgImg, (x,y))
