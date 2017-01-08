@@ -21,15 +21,15 @@ class FuzzySet:
 		
 	# fuzzy function shape - triangle
 	def get_truth_value(self, val):
-		medium = (self.low + self.high) / 2
+		medium = self.get_medium()
 		
 		result = 0.0
 		
 		if (val >= self.low) and (val <= medium):
-			result = 2 * (val - self.low) / (self.high - self.low)
+			result = 2.0 * (val - self.low) / (self.high - self.low)
 			
 		if (val <= self.high) and (val > medium):
-			result = 2 * (self.high - val) / (self.high - self.low)
+			result = 2.0 * (self.high - val) / (self.high - self.low)
 			
 		return result
 		
