@@ -38,22 +38,3 @@ class Map(object):
 
     def get_PixVal(self, x, y):
         return self.pixels[x,y]
-
-
-
-
-m = Map('map.png','im.png')
-
-xpos=0
-ypos=0
-
-while m.check_event() == "work":
-    print m.get_PixVal(xpos,ypos)
-    m.map(0,0)
-    m.set_RobotPos(xpos,ypos,ypos)
-    m.print_()
-    xpos=xpos+1
-    ypos=ypos+1
-    m.clock.tick(60)
-
-print "exit"
