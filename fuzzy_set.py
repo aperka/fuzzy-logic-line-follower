@@ -20,6 +20,7 @@ class FuzzySet:
 		self.rules_list = []
 		
 	# fuzzy function shape - triangle
+	""" function maps argument to its truth value @param val - value of process input """
 	def get_truth_value(self, val):
 		medium = self.get_medium()
 		
@@ -32,10 +33,12 @@ class FuzzySet:
 			result = 2.0 * (self.high - val) / (self.high - self.low)
 			
 		return result
-		
+	
+	""" function adds fuzzy rule @param fuzzy_rule_val - added fuzzy rule """
 	def add_rule(self, fuzzy_rule_val):
 		self.rules_list.append(fuzzy_rule_val)
-		
+	
+	""" function returns the value of the middle of fuzzy set's range """
 	def get_medium(self):
 		result = (self.low + self.high) / 2
 		return result
