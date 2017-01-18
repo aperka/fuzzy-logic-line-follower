@@ -1,42 +1,38 @@
 #!/usr/bin/python
-
-from map import Map
-from model import Model
-import math
-
-class Robot:
-    def __init__(self, xpos, ypos, angle, v):
-        self.xpos = xpos
-        self.ypos = ypos
-        self.angle = angle
-        self.v = v
-    def get_sensor_position(self, is_right):
-        t = 10
-        if is_right:
-            tmp_angle = ((self.angle + 45) % 360)*3.14/180
-        else:
-            tmp_angle = ((self.angle - 45) % 360)*3.14/180
-        return [self.xpos + t*math.sin(tmp_angle), self.ypos + t*math.cos(tmp_angle)]
-    def move(self):
-        tmp_angle = self.angle*3.14/180
-        self.xpos += self.v*math.sin(tmp_angle)
-        self.ypos += self.v*math.cos(tmp_angle)
-
-    def change_angle(self, angle):
-        self.angle = (self.angle + angle) % 360
+import sys
+from app.map.map import Map
+from app.fuzzy_logic.model import Model
+from app.robot.robot import Robot
 
 
-def average(l):
-    return sum(l)/float(len(l))
+print 'Number of arguments:', len(sys.argv), 'arguments.'
+print 'Argument List:', str(sys.argv)
 
-xpos = 120
-ypos = 380
-angle = 90
-v = 1
+if len(sys.argv) > 1:
+    map_number = sys.argv[1]
 
-m = Map('map1.png','im.png')
-robot = Robot(xpos, ypos, angle, v)
-model = Model()
+
+    if map_number == '2':
+        xpos = 230
+        ypos = 280
+        angle = 90
+        v = 1
+    
+        m = Map('app/images/map2.png','app/images/im.png')
+        robot = Robot(xpos, ypos, angle, v)
+        model = Model()
+    elif map_number == '1':
+        xpos = 120
+        ypos = 380
+        angle = 90
+        v = 1
+        
+        m = Map('app/images/map1.png','app/images/im.png')
+        robot = Robot(xpos, ypos, angle, v)
+        model = Model()
+    else:
+        print 'run.py 1 \r\n or \r\nrun.py 2'
+        sys.exit()
 
 
 while m.check_event() == "work":
@@ -56,5 +52,5 @@ while m.check_event() == "work":
     robot.change_angle(-angle/10)
     robot.move()
 
-    m.clock.tick(60)
+    m.clock.tick(100)
 print "exit"

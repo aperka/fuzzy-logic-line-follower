@@ -11,7 +11,7 @@ class Model:
 	y_linguistic_val = []
 	
 	def __init__(self):
-		conf_file = open("init.conf", "r")
+		conf_file = open("app/fuzzy_logic/init.conf", "r")
 		
 		generator = file.get_word(conf_file)
 		
