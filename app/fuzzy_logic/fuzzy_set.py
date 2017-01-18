@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import fuzzy_rule
+import app.fuzzy_logic.fuzzy_rule
 
 class FuzzySet:
 	name = ""

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import fuzzy_set
+import app.fuzzy_logic.fuzzy_set
 
 class FuzzyRule:
 	# if x1_set contains first input value

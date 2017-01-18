@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-import fuzzy_set
-import fuzzy_rule
-import fuzzified_val
-import file
+import app.fuzzy_logic.fuzzy_set
+import app.fuzzy_logic.fuzzy_rule
+import app.fuzzy_logic.fuzzified_val
+import app.fuzzy_logic.file
 
 class Model:
 	x1_linguistic_val = []
@@ -13,7 +13,7 @@ class Model:
 	def __init__(self):
 		conf_file = open("app/fuzzy_logic/init.conf", "r")
 		
-		generator = file.get_word(conf_file)
+		generator = app.fuzzy_logic.file.get_word(conf_file)
 		
 		for word in generator:
 			if (word == 'x1'):
@@ -31,7 +31,7 @@ class Model:
 			if (word == end_mark):
 				break
 			else:
-				set = fuzzy_set.FuzzySet(word, int(next(generator)), int(next(generator)))
+				set = app.fuzzy_logic.fuzzy_set.FuzzySet(word, int(next(generator)), int(next(generator)))
 				linguistic_val.append(set)
 				
 	def get_rules_from_file(self, fileobj, generator):
@@ -44,7 +44,7 @@ class Model:
 			next(generator)
 			y_set_val = self.find_set(next(generator), self.y_linguistic_val)
 			
-			rule = fuzzy_rule.FuzzyRule(x1_set_val, x2_set_val, y_set_val)
+			rule = app.fuzzy_logic.fuzzy_rule.FuzzyRule(x1_set_val, x2_set_val, y_set_val)
 	
 	def find_set(self, name, linguistic_val):
 		for set in linguistic_val:
@@ -58,7 +58,7 @@ class Model:
 			member_val_val = set.get_truth_value(val)
 			
 			if member_val_val != 0.0:
-				fuzzified_val_val = fuzzified_val.FuzzifiedVal(member_val_val, set)
+				fuzzified_val_val = app.fuzzy_logic.fuzzified_val.FuzzifiedVal(member_val_val, set)
 				fuzzified_vals.append(fuzzified_val_val)
 				
 		return fuzzified_vals
@@ -72,7 +72,7 @@ class Model:
 				
 				if fuzz_x2 != None:
 					member_val_y = min(fuzz_x1.member_val, fuzz_x2.member_val)
-					fuzz_y = fuzzified_val.FuzzifiedVal(member_val_y, fuzz_rule.y_set)
+					fuzz_y = app.fuzzy_logic.fuzzified_val.FuzzifiedVal(member_val_y, fuzz_rule.y_set)
 					fuzzified_vals_y.append(fuzz_y)
 					
 		return fuzzified_vals_y
